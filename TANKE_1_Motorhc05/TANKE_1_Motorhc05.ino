@@ -44,7 +44,6 @@ void loop(){
     Serial.write(DATO);
     Serial.println('\r\n'); 
      Serial.println("dato" + DATO);
-
     
       if(DATO == '1') { MotorForward();}
       else if(DATO == '3') {MotorBackward();}
@@ -58,9 +57,7 @@ void loop(){
  
   }
   delay(50);
-  
 }
-
 
 
 // Funciones de motores
@@ -75,11 +72,12 @@ void MotorForward(){
   digitalWrite(IN2,LOW);
   digitalWrite(IN3,LOW); 
   digitalWrite(IN4,HIGH);
+  delay(90);
 }
 
 /* BACKWARD */
 void MotorBackward(){
-    Serial.println(speedCar);
+  Serial.println(speedCar);
 
   analogWrite(ENA, speedCar);  // velocidad mediante PWM en ENA
   analogWrite(ENB, speedCar);  // velocidad mediante PWM en ENB
@@ -88,57 +86,66 @@ void MotorBackward(){
   digitalWrite(IN2,HIGH);
   digitalWrite(IN3,HIGH);
   digitalWrite(IN4,LOW);
+  delay(90);
 }
+
 /* TURN RIGHT */
 void TurnRight(){
-    Serial.println(speedCar);
-
+  Serial.println(speedCar);
+  MotorForward();
+  delay(200);
+  MotorStop();
+  
   analogWrite(ENA, speedCar);  // velocidad mediante PWM en ENA
-   analogWrite(ENB, speedCar);  // velocidad mediante PWM en ENB
+  analogWrite(ENB, speedCar);  // velocidad mediante PWM en ENB
   
   digitalWrite(IN1, LOW); // IN1 a cero logico
   digitalWrite(IN2, HIGH);  // IN2 a uno logico
   digitalWrite(IN3, LOW); // IN3 a cero logico
   digitalWrite(IN4, HIGH);  // IN4 a uno logico
+  delay(90);
 }
 
 /* TURN LEFT */
 void TurnLeft(){
-   Serial.println(speedCar);
-
-   analogWrite(ENA, speedCar);  // velocidad mediante PWM en ENA
-   analogWrite(ENB, speedCar);  // velocidad mediante PWM en ENB
+  Serial.println(speedCar);
+  MotorForward();
+  delay(200);
+  MotorStop();
+      
+  analogWrite(ENA, speedCar);  // velocidad mediante PWM en ENA
+  analogWrite(ENB, speedCar);  // velocidad mediante PWM en ENB
 
   digitalWrite(IN1, HIGH); // IN1 a cero logico
   digitalWrite(IN2, LOW);  // IN2 a uno logico
   digitalWrite(IN3, HIGH); // IN3 a cero logico
   digitalWrite(IN4, LOW);  // IN4 a uno logicologico
+  delay(90);
 }
 
 void MotorStop(){   
   analogWrite(ENA, speedOff);    // deshabilita motor A
   analogWrite(ENB, speedOff);    // deshabilita motor B
+  delay(90);
 }
 
 //  -----------------------  SPEED  -----------------------
 int SetSpeedCarMAX(){
   speedCar = speedMAX;
-    Serial.print("speedCar "+ speedCar);
-
+  Serial.print("speedCar "+ speedCar);
   delay(90);  
 }
 
 
 int SetSpeedCarMED(){
   speedCar = speedMED;
-    Serial.print("speedCar "+ speedCar);
-
+  Serial.print("speedCar "+ speedCar);
   delay(90);  
 }
 
 
 int SetSpeedCarMIN(){
   speedCar = speedMIN;
-  
+  Serial.print("speedCar "+ speedCar);
   delay(90);  
 }
